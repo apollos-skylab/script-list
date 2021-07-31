@@ -1,6 +1,6 @@
 If you want to view this simple application I used to stay on track for 
 becoming a legendary web developer please drag and drop the index file 
-in your prefered browser.
+in your prefered browser after downloading the repo onto your local machine.
 
 
 
