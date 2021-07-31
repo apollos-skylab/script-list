@@ -40,3 +40,5 @@ button.addEventListener("click", addListAfterClick);
 // this finalizes everything I have worked for and looks for a click event then running the function for click
 input.addEventListener("keypress", addListAfterKeypress);
 // this looks for a keypress of 13 form the enter key and runs the keypress function
+// to be noted, I am passing a reference to the function and not running them,
+// this is called a callback function when one does not instintiate the function with ()
