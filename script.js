@@ -1,25 +1,23 @@
 var button = document.getElementById("enter");
-// referencing and storing my button by selecting the elements id
-var input = document.getElementById("userinput")
-// referencing my input field so I can add what is typed into it onto my list later
+var input = document.getElementById("userinput");
 var ul = document.querySelector("ul");
-// referencing the ul so that I know where I want to store the new data from my input
-// field after pressing a enter or clicking the button
+
+function createListElement() {
+	var div = document.createElement("div");
+	var li = document.createElement("li");
+	var delButton = document.createElement("button");
+	div.classList.add("wrapper");
+	ul.appendChild(div);
+	div.append(li, delButton);
+	li.classList.add("taskClass");
+	li.appendChild(document.createTextNode(input.value));
+	input.value = "";
+	delButton.classList.add("delClass");
+	delButton.innerHTML='Del';
+}
 
 function inputLength() {
 	return input.value.length;
-}
-// creating a function decleration that returns the value of my input fields text length
-
-function createListElement() {
-	var li = document.createElement("li");
-	// create an li element and stores it in the var li
-	li.appendChild(document.createTextNode(input.value));
-	// create text from the value that was typed
-	ul.appendChild(li);
-	// append li that was created to the ul
-	input.value = "";
-	// reset the value of input once the text has been created
 }
 
 function addListAfterClick() {
@@ -27,18 +25,30 @@ function addListAfterClick() {
 		createListElement();
 	}
 }
-// this is a fail safe so I can't just add an empty string to the list
 
 function addListAfterKeypress(event) {
-	if(inputLength() > 0 && event.keyCode === 13) {
+	if (inputLength() > 0 && event.keyCode === 13) {
 		createListElement();
 	}
 }
-// this is so that I can use the enter key as well as clicking the enter button
 
+function doneTask(task) {
+	if (task.target.tagName === "LI"){
+		task.target.classList.toggle("done");
+	}
+}
+
+function deleteListElement(element) {
+	if (element.target.className === "delClass"){
+		element.target.parentElement.remove();
+	}
+}
+
+function handleUlClick (element) {
+	doneTask(element);
+	deleteListElement(element);
+}
+
+ul.addEventListener("click", handleUlClick)
 button.addEventListener("click", addListAfterClick);
-// this finalizes everything I have worked for and looks for a click event then running the function for click
 input.addEventListener("keypress", addListAfterKeypress);
-// this looks for a keypress of 13 form the enter key and runs the keypress function
-// to be noted, I am passing a reference to the function and not running them,
-// this is called a callback function when one does not instintiate the function with ()
